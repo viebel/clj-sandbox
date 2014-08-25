@@ -10,21 +10,27 @@
 (into [] a (range 4))
 
 
-(def c
-(chan 1 a))
+(def c (chan 1 a))
 
-(def cc
-(chan 1 (comp (map #(.-keyCode %))
-                  (filter #{37 39})
-                  (map {37 :previous 39 :next}))))
+(def cc (chan 1 (comp
+                 (filter #{37 39})
+                 (map {37 :previous 39 :next}))))
 
 
+(go
+ (<! (timeout 5000))
+ (println "done"))
 
-(put! cc 5)
+(def d (chan))
 
-(<!! cc)
+
+(put! cc 37)
+(go
+ (println (<! cc)))
+
+
 
 (put! c 19)
 
-(<! c)
-
+(go
+ (println (<! c)))
