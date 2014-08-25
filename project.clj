@@ -1,10 +1,14 @@
 (defproject clj-sandbox "0.1.0-SNAPSHOT"
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
-  :dependencies [[org.clojure/clojure "1.5.1"]
+  :dependencies [[org.clojure/clojure "1.7.0-alpha1"]
                  [shodan "0.3.0"]
+                 [im.chit/purnam "0.4.3"]
+                 [viebel/klozzer "0.2.0"]
                  [com.cemerick/piggieback "0.1.3"]
-                 [org.clojure/core.async "0.1.267.0-0d7780-alpha"]
+                 [cljs-http "0.1.14"]
+                 [com.andrewmcveigh/cljs-time "0.1.4"]
+                 [org.clojure/core.async "0.1.338.0-5c5012-alpha"]
                  [org.clojure/clojurescript "0.0-2202"]
                  [compojure "1.1.6"]]
   :plugins [[lein-ring "0.8.10"]
