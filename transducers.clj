@@ -4,13 +4,32 @@
 
 (def a (map #(* % 2)))
 
-
-(transduce a + 0  (range 4))
-
-(into [] a (range 4))
+(def f (filter even?))
+(def g (filter (partial < 0)))
 
 
-(def c (chan 1 a))
+(comp f g)
+
+(transduce (comp f g)  + 0 [1 2 3 -1 -2] )
+
+
+(into [] (comp f g)  [1 2 3 10  -1 -2] )
+
+(sequence f  [1 2 3 10  -1 -2] )
+
+(sequence (comp f g)  [1 2 3 10  -1 -2])
+
+
+
+
+(transduce a + 0 (range 4))
+
+
+
+((comp #(* 2 %) #(+ 100 %)) 18)
+
+
+(def c (chan 1 (comp f a)))
 
 (def cc (chan 1 (comp
                  (filter #{37 39})
@@ -31,6 +50,9 @@
 
 
 (put! c 19)
+(put! c 20)
+
+
 
 (go
  (println (<! c)))
