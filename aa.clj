@@ -1,69 +1,22 @@
 (ns user
+  (:require [clojure.string :as string])
   (:use
    [clojure.core.async :only [<! go timeout chan >!]]))
 
+(defn to-num [x]
+  (read-string (string/replace x #"ms" "")))
+
+(to-num "0.046ms")
 
 
+(def data (string/split (slurp "/tmp/ff") #"\n"))
 
-(def a 4)
-(defmacro me []
-  `(+ v 2))
-
-
-(macroexpand-1 '(me))
+(map second (map #(string/split % #":") data))
 
 
-(me)
-
-
-
-
-
-
-(defmacro deftry [& definition]
-  (if (vector? (second definition))
-    (let [[name args & body] definition]
-    `(defn ~name ~args
-       (try ~@body
-         (catch Error e#
-           (println "error caught:" e#)))))
-    (let [[name & definitions] definition]
-      `(defn ~name ~@(map (fn [[args body]] `(~args (try ~@body (catch Error e# (println "err caught")))))
-                                          definitions)))))
-
-
-
-
-(defmacro deftry [& definition]
-  (if (vector? (second definition))
-    (let [[name args & body] definition]
-    `(defn ~name ~args
-       (try ~@body
-         (catch Error e#
-           (println "error caught:" e#)))))
-    `(defn foofo [] 5)))
-
-
-
-(macroexpand-1 '(deftry foob [a] 3))
-
-(deftry foob [a] 3)
-
-
-(foob 1)
-
-
-(deftry fooa
-    ([a] 3)
-    ([] 5))
-
-
-(foofo)
-
-
-
-(def definition '([a] 3)
-    ([] 5))
-(let [[name & definitions] definition]
-      `(defn ~name ~@(map (fn [[args body]] `(~args (try ~@body (catch Error e# (println "err caught")))))
-                                          definitions)))
+(reduce (fn [res [k t]]
+          #_(println t)
+          (assoc res k [(+ (first (get res k [0 0])) (to-num t))
+                        (inc (second (get res k [0 0])))]))
+        {}
+        (map #(string/split % #":") data))
