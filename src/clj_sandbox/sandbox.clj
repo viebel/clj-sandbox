@@ -1,4 +1,4 @@
-(ns sandbox)
+(ns clj-sandbox.sandbox)
 
 (+ 2 1 2)
 
@@ -9,7 +9,6 @@
 (ancestors (class (clojure.lang.MapEntry. "a" 1)))
 
 
-(make-hierarchy (class (clojure.lang.MapEntry. "a" 1)))
 
 (class
  (empty []))

@@ -1,4 +1,4 @@
-(ns my-chan
+(ns clj-sandbox.chan
   (:import [java.util LinkedList Queue])
   (:require [clojure.core.async.impl.protocols :as impl])
   (:use      [clojure.core.async :as async :only [<! go timeout chan >! tap untap mult  <!!]]))
@@ -19,7 +19,7 @@
 (untap m d)
 (go (println (<! d))) ; NOTHING
 
-(put! c 55)
+(async/put! c 55)
 
 (tap m d)
 (go (println (<! d))) ; STILL NOTHING. THE MESSAGE WAS DROPPED

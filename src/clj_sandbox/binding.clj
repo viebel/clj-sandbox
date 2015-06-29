@@ -1,4 +1,4 @@
-(ns my-binding)
+(ns clj-sandbox.binding)
 
 
 (defn get-count [s]

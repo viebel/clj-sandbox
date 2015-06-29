@@ -1,4 +1,4 @@
-(ns my-macro
+(ns clj-sandbox.macro
   (:require [clojure.template :as template]
             [clojure.walk :as walk]))
 
@@ -51,6 +51,3 @@
 
 (String. "dasds")
 
-
-
-(klass. "dsdas")

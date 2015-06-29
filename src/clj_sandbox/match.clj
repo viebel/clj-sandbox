@@ -1,4 +1,4 @@
-(ns match-me
+(ns clj-sandbox.match
   (use  [clojure.core.async :only [<! go timeout chan >! put! <!!]]
         [clojure.core.match :only (match)]))
 

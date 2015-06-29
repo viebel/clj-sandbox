@@ -1,4 +1,4 @@
-(ns odaya
+(ns clj-sandbox.odaya
   [require [clojure.string :as string]])
 
 
@@ -23,9 +23,6 @@
 
 
 
-
-
-(apply + (map  toutou "abc"))
 
 
 
